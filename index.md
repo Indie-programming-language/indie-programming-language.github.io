@@ -1,4 +1,4 @@
-# 🚀 Indie Language Unofficial Fan Hub
+# 🚀 Indie - Language for Algorithmic Trading (LAT) | Unofficial Fan Hub
 
 > **The Revolutionary Programming Language That's Transforming Financial Analysis Forever**
 
