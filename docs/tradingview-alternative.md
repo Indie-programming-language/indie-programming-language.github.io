@@ -1,4 +1,4 @@
-# Your First Steps with Indie: A Beginner's Guide to Custom Indicators on TakeProfit
+# TradingView Altermative - Explore TakeProfit / Indie
 
 If you've been using TradingView for chart analysis and started feeling limited by Pine Script, or you're simply looking for an alternative to TradingView with more flexibility, this guide is for you. We'll walk through what Indie is, how it works, and how to create your first custom indicator without any prior programming experience.
 
