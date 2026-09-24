@@ -3,12 +3,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{ page.title }}</title>
+  {% assign path_parts = page.path | split: "/" %}
+  {% assign fallback_title = path_parts | last | replace: '.md', '' | replace: '.html', '' | replace: '-', ' ' %}
+  {% assign page_title = page.title | default: fallback_title %}
+  {% if page.url == '/' %}
+    <title>Indie — the Python-based scripting language for TakeProfit indicators</title>
+  {% else %}
+    <title>{{ page_title }} · Indie Docs</title>
+  {% endif %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Indie">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ page.description | default: site.description }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" id="code-style">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/yaml.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/ruby.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/python.min.js"></script>
   {% include styles.html %}
 
   <!-- Favicons and App Icons -->
@@ -22,28 +40,44 @@
 
 </head>
 <body>
-  <div class="header-controls">
-    <div class="theme-switch">
-      <span>Theme:</span>
-      <button onclick="toggleTheme()">Toggle theme</button>
-    </div>
+  <div class="disclaimer-bar">
+    <strong>Unofficial community project.</strong> Not affiliated with or endorsed by TakeProfit. Indie® and TakeProfit® are trademarks of their respective owners.
   </div>
-  
-  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+  <nav class="topnav">
+    <div class="topnav-left">
+      <a class="brand" href="{{ site.baseurl }}/">
+        <span class="brand-mark">I</span>
+        Indie
+        <span class="brand-badge">Community Docs</span>
+      </a>
+      <div class="topnav-links">
+        <a href="{{ site.baseurl }}/">Home</a>
+        <a href="{{ site.baseurl }}/docs/indie-language-reference.html">Docs</a>
+        <a href="{{ site.baseurl }}/docs/tradingview-alternative.html">TradingView alternative</a>
+        <a href="https://github.com/Indie-programming-language/indie-programming-language.github.io" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <div class="topnav-right">
+      <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme">🌓</button>
+      <a class="btn btn-primary btn-sm" href="https://takeprofit.com/" target="_blank" rel="noopener">Open TakeProfit</a>
+    </div>
+  </nav>
+
+  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
   <div class="overlay" onclick="toggleSidebar()"></div>
-  
+
   <div class="container">
     <div class="sidebar">
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search files...">
         <div class="search-results"></div>
       </div>
-      
+
       {% include file-tree.html %}
     </div>
-    
+
     <div class="main-content markdown-body">
-      {% assign path_parts = page.path | split: "/" %}
       {% if path_parts.size > 1 %}
         <ul class="breadcrumbs">
           <li>
@@ -59,18 +93,20 @@
           <li>{{ path_parts | last | replace: '.md', '' | replace: '.html', '' }}</li>
         </ul>
       {% endif %}
-      
-      <h1>{{ page.title | default: page.path | split: "/" | last | replace: '.md', '' | replace: '.html', '' }}</h1>
-      
+
+      {% unless page.hide_h1 %}
+      <h1>{{ page_title }}</h1>
+      {% endunless %}
+
       {% if page.content contains '<h2' or page.content contains '##' %}
       <div class="toc">
         <h3>Table of Contents</h3>
         <div id="toc-container" class="toc-list"></div>
       </div>
       {% endif %}
-      
+
       {{ content }}
-      
+
       {% if page.last_modified_at %}
       <p class="last-updated">
         Last updated: {{ page.last_modified_at | date: "%B %d, %Y" }}
@@ -78,7 +114,38 @@
       {% endif %}
     </div>
   </div>
-  
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a class="brand" href="{{ site.baseurl }}/">
+          <span class="brand-mark">I</span>
+          Indie
+        </a>
+        <p>An unofficial, community-maintained reference for Indie — the Python-based scripting language used to write custom indicators on the TakeProfit charting platform.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Docs</h4>
+        <a href="{{ site.baseurl }}/docs/indie-language-reference.html">Language reference</a>
+        <a href="{{ site.baseurl }}/docs/tradingview-alternative.html">TradingView alternative guide</a>
+        <a href="{{ site.baseurl }}/docs/quantitative-look-at-linear-regression-projections-universal-forecast-funnel.html">Linear regression projections</a>
+      </div>
+      <div class="footer-col">
+        <h4>TakeProfit</h4>
+        <a href="https://takeprofit.com/" target="_blank" rel="noopener">Platform</a>
+        <a href="https://takeprofit.com/docs" target="_blank" rel="noopener">Official docs</a>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <a href="https://github.com/Indie-programming-language/indie-programming-language.github.io" target="_blank" rel="noopener">Source on GitHub</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {{ 'now' | date: '%Y' }} Indie community docs. Unofficial project, not affiliated with TakeProfit.</span>
+      <span>Built with Jekyll on GitHub Pages.</span>
+    </div>
+  </footer>
+
   <!-- Modal window for images -->
   <div id="imageModal" class="modal">
     <span class="close">&times;</span>

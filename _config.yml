@@ -1,4 +1,9 @@
-title: indie-programming-language.github.io
+title: Indie — community docs
+description: >-
+  Unofficial community reference for Indie, the Python-based scripting
+  language used to build custom indicators on the TakeProfit charting
+  platform: language guide, built-in algorithms, and drawing API.
+url: "https://indie.lat"
 theme: minima
 markdown: kramdown
 

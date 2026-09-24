@@ -1,3 +1,12 @@
+---
+title: Indie Language Reference
+description: >-
+  Full reference for the Indie scripting language and the TakeProfit
+  platform docs it runs on — alerts, data types, decorators, built-in
+  algorithms, and the chart drawing API.
+hide_h1: true
+---
+
 # Alert Limitations, Delivery, and History
 Source: https://takeprofit.com/docs/guide/alerts/Alert-limitations-delivery-history
 

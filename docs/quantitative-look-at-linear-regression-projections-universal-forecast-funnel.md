@@ -1,3 +1,12 @@
+---
+title: Beyond the Moving Average — A Quantitative Look at Linear Regression Projections
+description: >-
+  Why OLS linear regression reacts faster than a Simple Moving Average, how
+  the Universal Forecast Funnel projects trend and volatility in Indie, and
+  where the approach breaks down.
+hide_h1: true
+---
+
 # Beyond the Moving Average: A Quantitative Look at Linear Regression Projections (and Their Limitations)
 
 *Why OLS reacts faster than SMA, and why “forecasting” remains a statistical assumption, not a guarantee.*
